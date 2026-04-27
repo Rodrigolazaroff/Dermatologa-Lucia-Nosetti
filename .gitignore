@@ -1,0 +1,18 @@
+# Bundle de diseño (solo referencia, no va al repo)
+_design_bundle/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Node (por si se migra a bundler)
+node_modules/
+dist/
+.env
+.env.local

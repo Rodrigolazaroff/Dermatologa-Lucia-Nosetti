@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dralucianosetti.com.ar/sitemap.xml
