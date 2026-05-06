@@ -256,7 +256,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={150} style={{ position: 'relative' }}>
-          <Placeholder label="[ FOTO_PRINCIPAL ]" ratio="3/4" />
+          <img src="images/foto_principal.webp" alt="Dra. Lucia Nosetti" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: 12, display: 'block', maxHeight: 'calc(100vh - 140px)' }} />
           <div className="float-slow" style={{
             position: 'absolute', bottom: 24, left: -22, background: '#fff',
             padding: '14px 20px', borderRadius: 14, boxShadow: C.shadowPink,
@@ -286,7 +286,9 @@ function Sobre() {
         maxWidth: 1240, margin: '0 auto', padding: '0 28px',
         display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 80, alignItems: 'center',
       }}>
-        <Reveal><Placeholder label="[ FOTO_PERFIL ]" ratio="4/5" /></Reveal>
+        <Reveal>
+          <img src="images/foto_de_perfil.webp" alt="Dra. Lucia Nosetti" style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', borderRadius: 12, display: 'block' }} />
+        </Reveal>
         <Reveal delay={120}>
           <SectionTag>Sobre mí</SectionTag>
           <h2 style={titleStyle}>
@@ -380,10 +382,10 @@ function Procedimientos() {
           <div style={{ textAlign: 'center', marginTop: 100, marginBottom: 60 }}>
             <SectionTag>Patologías</SectionTag>
             <h2 style={{ ...titleStyle, textAlign: 'center' }}>
-              Patologías que <em style={{ color: C.pinkNude, fontWeight: 400 }}>abordamos</em>
+              Compromiso con <em style={{ color: C.pinkNude, fontWeight: 400 }}>tu salud</em>
             </h2>
             <p style={{ color: C.inkMuted, fontSize: 17, maxWidth: 560, margin: '0 auto', lineHeight: 1.6, fontWeight: 300 }}>
-              Diagnóstico y seguimiento de las consultas dermatológicas más frecuentes en chicos, adolescentes y adultos.
+              Comprendemos la naturaleza de cada patología para acompañarte con los tratamientos adecuados.
             </p>
           </div>
         </Reveal>
@@ -397,15 +399,15 @@ function Procedimientos() {
 function Formacion() {
   const timeline = [
     ['2017',      'Médica (MN 166.497)',                    'Universidad del Salvador',       'USAL', 'https://www.usal.edu.ar/ingreso/'],
-    ['2018–2021', 'Residencia de Pediatría',                'Hospital Alemán, CABA',          'ALEM', 'https://www.hospitalaleman.org.ar/'],
+    ['2018–2021', 'Residencia de Pediatría',                'Hospital Alemán',                'ALEM', 'https://www.hospitalaleman.org.ar/'],
     ['2022',      'Posgrado en Medicina Estética',           'SAEME · UBA (Sociedad Argentina de Especialistas en Medicina Estética)', 'SAEM', 'https://saeme.com.ar/'],
-    ['2022–2025', 'Residencia de Dermatología Pediátrica',  'Hospital Ramos Mejía, CABA',     'RAMO', 'https://buenosaires.gob.ar/gcaba_historico/salud/hospitales-y-establecimientos-de-salud/hospital-ramos-mejia'],
+    ['2022–2025', 'Residencia de Dermatología Pediátrica',  'Hospital Ramos Mejía',           'RAMO', 'https://buenosaires.gob.ar/gcaba_historico/salud/hospitales-y-establecimientos-de-salud/hospital-ramos-mejia'],
   ];
   const exp = [
     ['Hospital Alemán',        'https://www.hospitalaleman.org.ar/'],
     ['Sanatorio San José',     'https://www.sanatoriosanjose.org.ar/'],
     ['Clínica Zabala',         'https://www.swissmedical.com.ar/clinewsite/zabala/'],
-    ['Ministerio de Salud CABA', 'https://buenosaires.gob.ar/gcaba_historico/salud'],
+    ['Ministerio de Salud', 'https://buenosaires.gob.ar/gcaba_historico/salud'],
   ];
 
   return (
