@@ -61,7 +61,7 @@ function Reveal({ children, delay = 0, as = 'div', style = {}, ...rest }) {
 function Placeholder({ label, ratio = '3/4', radius = 12, style = {} }) {
   return (
     <div style={{
-      width: '100%', aspectRatio: ratio, borderRadius: radius,
+      width: '100%', aspectRatio: ratio, borderRadius: radius, maxHeight: 'calc(100vh - 140px)',
       background: `linear-gradient(135deg, ${C.pinkSoft} 0%, ${C.pink} 60%, ${C.pinkNude} 120%)`,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       position: 'relative', overflow: 'hidden',
@@ -214,7 +214,7 @@ function Nav() {
 function Hero() {
   return (
     <section id="inicio" style={{
-      position: 'relative', minHeight: '100vh', paddingTop: 60, paddingBottom: 80,
+      position: 'relative', minHeight: 'calc(100vh - 70px)', boxSizing: 'border-box', display: 'flex', alignItems: 'center',
       background: `radial-gradient(ellipse at 30% 30%, ${C.pinkSoft} 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, ${C.pink}55 0%, transparent 60%), ${C.warmWhite}`,
       overflow: 'hidden',
     }}>
@@ -223,8 +223,8 @@ function Hero() {
       <div className="float-slow" style={{ position: 'absolute', top: '40%', left: '38%', width: 110, height: 110, borderRadius: '50%', border: `1px solid ${C.pinkNude}`, opacity: 0.2, pointerEvents: 'none', animationDelay: '-4s' }} />
 
       <div className="hero-grid" style={{
-        maxWidth: 1240, margin: '0 auto', padding: '60px 28px 0',
-        display: 'grid', gridTemplateColumns: '1.05fr 1fr', gap: 80, alignItems: 'center', position: 'relative',
+        maxWidth: 1240, margin: '0 auto', padding: '20px 28px', width: '100%',
+        display: 'grid', gridTemplateColumns: '1.05fr 1fr', gap: 48, alignItems: 'center', position: 'relative',
       }}>
         <Reveal>
           <span style={{
@@ -299,11 +299,13 @@ function Sobre() {
             <p style={{ margin: 0 }}>Creo en una medicina cercana, donde cada consulta sea un espacio de confianza, escucha y acompañamiento.</p>
           </div>
           <div className="stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
-            {[['9+', 'años de experiencia'], ['2', 'especialidades médicas']].map(([n, l], i) => (
+            {[['9+', 'Años de experiencia'], ['3', 'Especialidades médicas']].map(([n, l], i) => (
               <Reveal key={i} delay={i * 80}>
-                <div style={{ background: C.altSection, border: `1px solid ${C.border}`, borderRadius: 14, padding: '20px 18px' }}>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, color: C.pinkNude, fontWeight: 400, lineHeight: 1 }}>{n}</div>
-                  <div style={{ fontSize: 13, color: C.inkMuted, marginTop: 6, lineHeight: 1.4 }}>{l}</div>
+                <div style={{ background: C.altSection, border: `1px solid ${C.border}`, borderRadius: 14, padding: '20px 18px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+                    <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 32, color: C.pinkNude, fontWeight: 400, lineHeight: 1 }}>{n}</span>
+                    <span style={{ fontSize: 13, color: C.inkMuted, lineHeight: 1.4 }}>{l}</span>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -365,10 +367,10 @@ function Procedimientos() {
           <div style={{ textAlign: 'center', marginBottom: 60 }}>
             <SectionTag>Procedimientos</SectionTag>
             <h2 style={{ ...titleStyle, textAlign: 'center' }}>
-              Tratamientos para <em style={{ color: C.pinkNude, fontWeight: 400 }}>cada etapa</em>
+              Medicina para <em style={{ color: C.pinkNude, fontWeight: 400 }}>tu piel</em>
             </h2>
             <p style={{ color: C.inkMuted, fontSize: 17, maxWidth: 560, margin: '0 auto', lineHeight: 1.6, fontWeight: 300 }}>
-              Procedimientos dermatológicos y estéticos realizados con protocolos rigurosos y enfoque personalizado.
+              Soluciones dermatológicas y estéticas integrales con un enfoque profesional.
             </p>
           </div>
         </Reveal>
@@ -394,16 +396,16 @@ function Procedimientos() {
 // ── Formación ─────────────────────────────────────────────────────────────────
 function Formacion() {
   const timeline = [
-    ['2017',      'Médica (MN 166.497)',                    'Universidad del Salvador',       'USAL'],
-    ['2018–2021', 'Residencia de Pediatría',                'Hospital Alemán, CABA',          'ALEM'],
-    ['2022–2025', 'Residencia de Dermatología Pediátrica',  'Hospital Ramos Mejía, CABA',     'RAMO'],
+    ['2017',      'Médica (MN 166.497)',                    'Universidad del Salvador',       'USAL', 'https://www.usal.edu.ar/ingreso/'],
+    ['2018–2021', 'Residencia de Pediatría',                'Hospital Alemán, CABA',          'ALEM', 'https://www.hospitalaleman.org.ar/'],
+    ['2022',      'Posgrado en Medicina Estética',           'SAEME · UBA (Sociedad Argentina de Especialistas en Medicina Estética)', 'SAEM', 'https://saeme.com.ar/'],
+    ['2022–2025', 'Residencia de Dermatología Pediátrica',  'Hospital Ramos Mejía, CABA',     'RAMO', 'https://buenosaires.gob.ar/gcaba_historico/salud/hospitales-y-establecimientos-de-salud/hospital-ramos-mejia'],
   ];
   const exp = [
-    'Hospital Alemán',
-    'Sanatorio San José',
-    'Clínica Zabala',
-    'Ministerio de Salud CABA',
-    'Subsecretaría de Discapacidad',
+    ['Hospital Alemán',        'https://www.hospitalaleman.org.ar/'],
+    ['Sanatorio San José',     'https://www.sanatoriosanjose.org.ar/'],
+    ['Clínica Zabala',         'https://www.swissmedical.com.ar/clinewsite/zabala/'],
+    ['Ministerio de Salud CABA', 'https://buenosaires.gob.ar/gcaba_historico/salud'],
   ];
 
   return (
@@ -417,7 +419,7 @@ function Formacion() {
           <h2 style={titleStyle}>Trayectoria <em style={{ color: C.pinkNude, fontWeight: 400 }}>académica</em></h2>
           <div style={{ position: 'relative', paddingLeft: 36, marginTop: 36 }}>
             <div style={{ position: 'absolute', left: 11, top: 8, bottom: 8, width: 2, background: `linear-gradient(${C.pink}, ${C.pinkSoft})` }} />
-            {timeline.map(([year, title, place, logo], i) => (
+            {timeline.map(([year, title, place, logo, url], i) => (
               <Reveal key={i} delay={i * 100}>
                 <div style={{ position: 'relative', marginBottom: 36 }}>
                   <div style={{ position: 'absolute', left: -32, top: 4, width: 16, height: 16, borderRadius: '50%', background: C.pinkNude, border: '3px solid #fff', boxShadow: `0 0 0 2px ${C.pink}` }} />
@@ -425,7 +427,10 @@ function Formacion() {
                   <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 400, color: C.ink, margin: '0 0 6px', lineHeight: 1.25 }}>{title}</h3>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <LogoChip label={logo} />
-                    <span style={{ fontSize: 14, color: C.inkMuted }}>{place}</span>
+                    <a href={url} target="_blank" rel="noreferrer" style={{ fontSize: 14, color: C.inkMuted, textDecoration: 'none', transition: 'transform .2s ease', display: 'inline-block' }}
+                      onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+                      onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+                    >{place}</a>
                   </div>
                 </div>
               </Reveal>
@@ -436,17 +441,23 @@ function Formacion() {
         <Reveal delay={150}>
           <SectionTag>Experiencia</SectionTag>
           <h2 style={titleStyle}>Recorrido <em style={{ color: C.pinkNude, fontWeight: 400 }}>profesional</em></h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 36 }}>
-            {exp.map((place, i) => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 36 }}>
+            {exp.map(([place, url], i) => (
               <Reveal key={place} delay={i * 70}>
+                <a href={url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
                 <div className="exp-card" style={{
                   background: C.altSection, border: `1px solid ${C.border}`, borderRadius: 12,
                   padding: '18px 22px', display: 'flex', alignItems: 'center', gap: 16,
-                  transition: 'transform .25s ease, box-shadow .25s ease', cursor: 'default',
-                }}>
+                  transition: 'transform .25s ease, box-shadow .25s ease', cursor: 'pointer',
+                  maxWidth: '87%',
+                }}
+                  onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-3px)'}
+                  onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+                >
                   <div style={{ width: 10, height: 10, borderRadius: '50%', background: C.pinkNude, flexShrink: 0, boxShadow: `0 0 0 4px ${C.pinkSoft}` }} />
                   <div style={{ fontSize: 15, fontWeight: 500, color: C.ink }}>{place}</div>
                 </div>
+                </a>
               </Reveal>
             ))}
           </div>
