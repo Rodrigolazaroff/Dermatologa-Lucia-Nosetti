@@ -259,7 +259,13 @@ button {
   .form-row     { grid-template-columns: 1fr !important; }
   .gallery-grid { grid-template-columns: 1fr !important; }
 
-  /* timeline horizontal → vertical en mobile */
+  /* ── Hero mobile ── */
+  /* Menos espacio entre nav y badge */
+  #inicio { padding-top: 20px !important; align-items: flex-start !important; height: auto !important; min-height: 100vh !important; }
+  /* Foto principal completa en mobile */
+  #inicio img { object-fit: contain !important; max-height: 55vw !important; width: 100% !important; border-radius: 14px !important; }
+
+  /* ── Timeline horizontal → vertical en mobile ── */
   .timeline-h { height: auto !important; }
   .timeline-h-line { display: none !important; }
   .timeline-h-items {
@@ -270,10 +276,39 @@ button {
     gap: 0 !important;
   }
   .timeline-h-items > * {
-    position: relative !important;
+    position: static !important;
     flex: none !important;
     margin-bottom: 32px !important;
+    padding-top: 0 !important;
+    padding-right: 0 !important;
   }
+  /* Punto conector: ocultar el dot absoluto, usar borde izquierdo del items */
+  .timeline-h-items > * > div:not(.timeline-content) { display: none !important; }
+  /* Contenido: resetear posición absoluta */
+  .timeline-content {
+    position: static !important;
+    height: auto !important;
+    display: block !important;
+    padding-right: 16px !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* ── Experiencia cards → columna en mobile ── */
+  .exp-card { max-width: 100% !important; width: 100% !important; }
+
+  /* ── Instagram mobile: columna, centrado ── */
+  .ig-grid {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 32px !important;
+  }
+  .ig-grid > * { width: 100% !important; max-width: 100% !important; }
+  /* Limitar ancho del embed en mobile */
+  .ig-grid blockquote,
+  .ig-grid iframe { max-width: 100% !important; width: 100% !important; }
+  /* Centrar texto Instagram en mobile */
+  .ig-grid > *:last-child { text-align: center !important; }
+  .ig-grid > *:last-child a { display: inline-block !important; }
 
   h1      { font-size: 44px !important; }
   section { padding: 80px 0 !important; }

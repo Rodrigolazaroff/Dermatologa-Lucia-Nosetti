@@ -440,7 +440,7 @@ function Formacion() {
                   }} />
 
                   {/* contenido arriba o abajo */}
-                  <div style={{
+                  <div className="timeline-content" style={{
                     position: 'absolute', left: 0, paddingRight: 20,
                     ...(above
                       ? { top: 0, height: BLOCK - 12, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }
