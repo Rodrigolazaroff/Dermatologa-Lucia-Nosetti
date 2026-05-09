@@ -130,7 +130,7 @@ function Nav() {
     ['Procedimientos', '#procedimientos'],
     ['Formación', '#formacion'],
     ['Experiencia', '#experiencia'],
-    ['Instagram', '#instagram'],
+    ['Redes', '#instagram'],
     ['Turnos', '#turnos'],
   ];
 
@@ -322,30 +322,54 @@ function Sobre() {
 }
 
 // ── Procedimientos ────────────────────────────────────────────────────────────
+function VerTodosBtn({ open, onClick }) {
+  return (
+    <div style={{ textAlign: 'center', marginTop: 24 }} className="ver-todos-wrap">
+      <button onClick={onClick} className="ver-todos-btn" style={{
+        background: 'none', border: `1px solid ${C.pinkNude}`, borderRadius: 999,
+        color: C.pinkNude, fontSize: 13, fontWeight: 500, letterSpacing: 1,
+        padding: '8px 22px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6,
+        transition: 'background 0.4s ease, color 0.4s ease',
+      }}>
+        {open ? 'Ocultar' : 'Ver todos'}
+        <span style={{
+          display: 'inline-block',
+          transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+        }}>↓</span>
+      </button>
+    </div>
+  );
+}
+
 function Procedimientos() {
+  const [openProc, setOpenProc] = useState(false);
+  const [openPath, setOpenPath] = useState(false);
   const items = [
-    ['Extracción de moluscos', 'Tratamiento seguro y preciso para niños y adultos.'],
-    ['Biopsia de piel', 'Diagnóstico dermatológico bajo estrictos protocolos.'],
-    ['Mapeo 360° de lunares', 'Seguimiento digital completo de lesiones pigmentadas.'],
-    ['Peeling químico', 'Renovación celular con resultados visibles y duraderos.'],
+    ['Extracción de moluscos', 'Remoción de lesiones cutáneas.'],
+    ['Biopsia de piel', 'Toma de muestra de tejido para análisis histopatológico y diagnóstico.'],
+    ['Mapeo 360° de lunares', 'Control fotográfico digitalizado para la detección temprana de anomalías.'],
+    ['Peeling químico', 'Aplicación de activos para exfoliar y regenerar las capas externas de la piel.'],
     ['PRP capilar y facial', 'Plasma rico en plaquetas para rejuvenecimiento y caída del cabello.'],
-    ['Mesoterapia', 'Microinyecciones para hidratación profunda y tratamiento capilar.'],
-    ['Microagujas', 'Estimulación del colágeno para mejorar la textura de la piel.'],
-    ['Toxina botulínica', 'Suavizado de expresiones con resultados naturales.'],
+    ['Mesoterapia', 'Infiltración de nutrientes para revitalizar tejidos y folículos.'],
+    ['Microagujas', 'Terapia de inducción de colágeno para suavizar marcas y mejorar la densidad dérmica.'],
+    ['Toxina botulínica', 'Relajación muscular para atenuar surcos y líneas de expresión dinámicas.'],
   ];
   const conditions = [
-    ['Dermatitis atópica pediátrica', 'Tratamiento integral para piel sensible en niños y adolescentes.'],
-    ['Rosácea', 'Manejo del enrojecimiento facial y brotes con protocolos específicos.'],
-    ['Piel del recién nacido', 'Acompañamiento desde los primeros días de vida.'],
-    ['Verruga vulgar', 'Eliminación efectiva de lesiones causadas por HPV cutáneo.'],
-    ['Molusco contagioso', 'Tratamiento ambulatorio cuidadoso para chicos y adultos.'],
-    ['Acné adolescente', 'Plan personalizado para controlar brotes y prevenir cicatrices.'],
-    ['Skincare especializado', 'Rutinas adaptadas a cada tipo y etapa de la piel.'],
-    ['Lesiones pigmentadas', 'Evaluación, seguimiento y tratamiento de manchas cutáneas.'],
+    ['Dermatitis atópica pediátrica', 'Control terapéutico de la inflamación y el prurito en pieles infantiles.'],
+    ['Rosácea', 'Tratamiento para estabilizar la barrera cutánea y reducir el eritema facial.'],
+    ['Piel del recién nacido', 'Cuidados preventivos para la dermis en sus primeras etapas.'],
+    ['Verruga vulgar', 'Procedimientos de eliminación de crecimientos benignos causados por virus.'],
+    ['Molusco contagioso', 'Abordaje clínico de pápulas infecciosas comunes en la infancia.'],
+    ['Acné adolescente', 'Terapia para regular la seborrea y prevenir secuelas cicatrizales.'],
+    ['Skincare especializado', 'Diseño de regímenes dermocosméticos adaptados a necesidades fisiológicas.'],
+    ['Lesiones pigmentadas', 'Diagnóstico y tratamiento correctivo de alteraciones en la coloración de la piel.'],
   ];
 
-  const renderGrid = (data) => (
-    <div className="proc-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
+  const renderGrid = (data, open, setOpen) => (
+    <>
+      <VerTodosBtn open={open} onClick={() => setOpen(o => !o)} />
+      <div className={`proc-grid proc-grid-collapsible${open ? ' proc-grid-open' : ''}`} style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18, marginTop: 24 }}>
       {data.map(([title, desc], i) => (
         <Reveal key={title} delay={(i % 4) * 80}>
           <div className="proc-card" style={{
@@ -361,7 +385,8 @@ function Procedimientos() {
           </div>
         </Reveal>
       ))}
-    </div>
+      </div>
+    </>
   );
 
   return (
@@ -379,7 +404,7 @@ function Procedimientos() {
             </p>
           </div>
         </Reveal>
-        {renderGrid(items)}
+        {renderGrid(items, openProc, setOpenProc)}
 
         <Reveal>
           <div style={{ textAlign: 'center', marginTop: 100, marginBottom: 60 }}>
@@ -392,7 +417,7 @@ function Procedimientos() {
             </p>
           </div>
         </Reveal>
-        {renderGrid(conditions)}
+        {renderGrid(conditions, openPath, setOpenPath)}
       </div>
     </section>
   );
@@ -523,16 +548,16 @@ function Instagram() {
       <div className="ig-grid" style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px', display: 'flex', gap: 80, alignItems: 'center' }}>
 
         {/* Video izquierda */}
-        <Reveal delay={120} style={{ flexShrink: 0, width: 480 }}>
-          <div style={{
-            width: 480, background: '#fff', borderRadius: 18, padding: 12,
+        <Reveal delay={120} className="ig-card-wrap" style={{ flexShrink: 0, width: 480 }}>
+          <div className="ig-card" style={{
+            width: '100%', background: '#fff', borderRadius: 18, padding: 12,
             boxShadow: '0 30px 60px -30px rgba(232,160,168,0.6)', border: `1px solid ${C.border}`,
           }}>
             <blockquote
               className="instagram-media"
               data-instgrm-permalink="https://www.instagram.com/reel/DP3zU3jADq6/?igsh=cGIydjE2dTdmamN3"
               data-instgrm-version="14"
-              style={{ background: '#FFF', border: 0, margin: '0 auto', maxWidth: 480, minWidth: 0, padding: 0, width: '100%' }}
+              style={{ background: '#FFF', border: 0, margin: '0 auto', maxWidth: '100%', minWidth: 0, padding: 0, width: '100%' }}
             >
               <div style={{ padding: 16, textAlign: 'center', color: C.inkMuted, fontSize: 14 }}>
                 Cargando contenido de Instagram…
@@ -543,12 +568,12 @@ function Instagram() {
 
         {/* Texto derecha */}
         <Reveal style={{ flex: 1 }}>
-          <SectionTag>Instagram</SectionTag>
+          <SectionTag>Redes</SectionTag>
           <h2 style={{ ...titleStyle, textAlign: 'left' }}>
             Seguime en <em style={{ color: C.pinkNude, fontWeight: 400 }}>Instagram</em>
           </h2>
           <p style={{ color: C.pinkNude, fontSize: 16, fontWeight: 500, margin: '0 0 36px' }}>@dralucianosetti</p>
-          <a href={IG_LINK} target="_blank" rel="noreferrer" className="btn-outline">Ver más en Instagram</a>
+          <a href={IG_LINK} target="_blank" rel="noreferrer" className="btn-outline">Ver más contenido</a>
         </Reveal>
 
       </div>
@@ -570,8 +595,9 @@ function Turnos() {
           <div style={{ textAlign: 'center', marginBottom: 60 }}>
             <SectionTag>Turnos</SectionTag>
             <h2 style={{ ...titleStyle, textAlign: 'center' }}>
-              Visitanos en <em style={{ color: C.pinkNude, fontWeight: 400 }}>Recoleta</em>
+              Atención <em style={{ color: C.pinkNude, fontWeight: 400 }}>presencial y virtual</em>
             </h2>
+            <p style={{ color: C.inkMuted, fontSize: 17, margin: '14px 0 0', fontWeight: 300 }}>Encontranos en Recoleta o coordiná tu consulta online.</p>
           </div>
         </Reveal>
 
@@ -625,6 +651,7 @@ function GaleriaConsultorio() {
     'images/Consultorio1.webp',
     'images/Consultorio2.webp',
     'images/Consultorio3.webp',
+    'images/Consultorio5.webp',
   ];
   // Triplicamos para que el loop sea continuo y nunca se vea el salto
   const todas = [...fotos, ...fotos, ...fotos];
@@ -646,7 +673,7 @@ function GaleriaConsultorio() {
             }}>
               <img
                 src={src}
-                alt={`Consultorio ${(i % 3) + 1}`}
+                alt={`Consultorio ${(i % fotos.length) + 1}`}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';

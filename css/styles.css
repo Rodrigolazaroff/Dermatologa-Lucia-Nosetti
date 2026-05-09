@@ -311,12 +311,14 @@ button {
     padding: 0 16px !important;
   }
   .ig-grid > * { width: 100% !important; max-width: 100% !important; flex-shrink: 1 !important; }
-  /* Contener el embed dentro de la pantalla */
-  .ig-grid > *:first-child { overflow: hidden !important; }
-  .ig-grid blockquote { max-width: 100% !important; min-width: 0 !important; width: 100% !important; }
-  .ig-grid iframe { max-width: 100% !important; width: 100% !important; }
+  /* Card de Instagram en mobile: ancho completo de la sección, embed ocupando 100% */
+  .ig-card-wrap { width: 100% !important; max-width: 360px !important; margin: 0 auto !important; }
+  .ig-card { width: 100% !important; padding: 8px !important; }
+  .ig-grid blockquote { max-width: 100% !important; min-width: 0 !important; width: 100% !important; margin: 0 !important; }
+  .ig-grid iframe { max-width: 100% !important; width: 100% !important; min-width: 0 !important; }
   /* Centrar texto Instagram en mobile */
   .ig-grid > *:last-child { text-align: center !important; }
+  .ig-grid > *:last-child h2 { text-align: center !important; }
   .ig-grid > *:last-child a { display: inline-block !important; }
 
   /* ── Horarios: stack vertical en mobile ── */
@@ -328,4 +330,32 @@ button {
 
   h1      { font-size: 44px !important; }
   section { padding: 80px 0 !important; }
+
+  /* ── Botón "Ver todos": visible solo en mobile ── */
+  .ver-todos-wrap { display: block !important; }
+
+  /* ── Grid colapsable en mobile ── */
+  .proc-grid-collapsible {
+    display: none !important;
+  }
+  .proc-grid-collapsible.proc-grid-open {
+    display: grid !important;
+  }
+}
+
+/* ── Botón "Ver todos": oculto en desktop ── */
+.ver-todos-wrap { display: none; }
+
+/* ── Bounce animation en el botón ── */
+@keyframes verTodosBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(4px); }
+}
+.ver-todos-btn {
+  animation: verTodosBounce 2s ease-in-out infinite;
+  transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+.ver-todos-btn:hover {
+  animation: none;
+  background: var(--pink-soft) !important;
 }
