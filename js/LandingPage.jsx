@@ -542,7 +542,7 @@ function Instagram() {
   }, []);
 
   return (
-    <section id="instagram" style={{ background: '#fff', padding: '120px 0' }}>
+    <section id="instagram" style={{ background: C.altSection, padding: '120px 0' }}>
       <div className="ig-grid" style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px', display: 'flex', gap: 80, alignItems: 'center' }}>
 
         {/* Video izquierda */}
