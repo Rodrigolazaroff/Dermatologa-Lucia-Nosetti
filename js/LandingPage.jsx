@@ -214,7 +214,7 @@ function Nav() {
 function Hero() {
   return (
     <section id="inicio" style={{
-      position: 'relative', minHeight: 'calc(100vh - 70px)', boxSizing: 'border-box', display: 'flex', alignItems: 'center',
+      position: 'relative', height: '100vh', boxSizing: 'border-box', display: 'flex', alignItems: 'flex-start',
       background: `radial-gradient(ellipse at 30% 30%, ${C.pinkSoft} 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, ${C.pink}55 0%, transparent 60%), ${C.warmWhite}`,
       overflow: 'hidden',
     }}>
@@ -223,7 +223,7 @@ function Hero() {
       <div className="float-slow" style={{ position: 'absolute', top: '40%', left: '38%', width: 110, height: 110, borderRadius: '50%', border: `1px solid ${C.pinkNude}`, opacity: 0.2, pointerEvents: 'none', animationDelay: '-4s' }} />
 
       <div className="hero-grid" style={{
-        maxWidth: 1240, margin: '0 auto', padding: '20px 28px', width: '100%',
+        maxWidth: 1240, margin: '0 auto', padding: '40px 28px 20px', width: '100%',
         display: 'grid', gridTemplateColumns: '1.05fr 1fr', gap: 48, alignItems: 'center', position: 'relative',
       }}>
         <Reveal>
@@ -256,7 +256,9 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={150} style={{ position: 'relative' }}>
-          <img src="images/foto_principal.webp" alt="Dra. Lucia Nosetti" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: 12, display: 'block', maxHeight: 'calc(100vh - 140px)' }} />
+          <div style={{ borderRadius: 20, overflow: 'hidden' }}>
+            <img src="images/foto_principal.webp" alt="Dra. Lucia Nosetti" style={{ width: '100%', maxHeight: 'calc(100vh - 180px)', objectFit: 'cover', objectPosition: 'top center', display: 'block' }} />
+          </div>
           <div className="float-slow" style={{
             position: 'absolute', bottom: 24, left: -22, background: '#fff',
             padding: '14px 20px', borderRadius: 14, boxShadow: C.shadowPink,
