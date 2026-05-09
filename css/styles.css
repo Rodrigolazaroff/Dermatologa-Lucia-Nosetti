@@ -282,8 +282,15 @@ button {
     padding-top: 0 !important;
     padding-right: 0 !important;
   }
-  /* Punto conector: ocultar el dot absoluto, usar borde izquierdo del items */
-  .timeline-h-items > * > div:not(.timeline-content) { display: none !important; }
+  /* Dot conector: reposicionar sobre la línea vertical izquierda */
+  .timeline-h-items > * > div:not(.timeline-content) {
+    display: block !important;
+    position: absolute !important;
+    top: 4px !important;
+    left: -36px !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
   /* Contenido: resetear posición absoluta */
   .timeline-content {
     position: static !important;
@@ -301,14 +308,23 @@ button {
     flex-direction: column !important;
     align-items: center !important;
     gap: 32px !important;
+    padding: 0 16px !important;
   }
-  .ig-grid > * { width: 100% !important; max-width: 100% !important; }
-  /* Limitar ancho del embed en mobile */
-  .ig-grid blockquote,
+  .ig-grid > * { width: 100% !important; max-width: 100% !important; flex-shrink: 1 !important; }
+  /* Contener el embed dentro de la pantalla */
+  .ig-grid > *:first-child { overflow: hidden !important; }
+  .ig-grid blockquote { max-width: 100% !important; min-width: 0 !important; width: 100% !important; }
   .ig-grid iframe { max-width: 100% !important; width: 100% !important; }
   /* Centrar texto Instagram en mobile */
   .ig-grid > *:last-child { text-align: center !important; }
   .ig-grid > *:last-child a { display: inline-block !important; }
+
+  /* ── Horarios: stack vertical en mobile ── */
+  .horario-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
 
   h1      { font-size: 44px !important; }
   section { padding: 80px 0 !important; }

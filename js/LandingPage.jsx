@@ -585,7 +585,7 @@ function Turnos() {
                 <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: C.pinkNude, fontWeight: 500, marginBottom: 14 }}>Horarios de atención</div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   {horarios.map(([dia, hora], i) => (
-                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i < horarios.length - 1 ? `1px dashed ${C.border}` : 'none' }}>
+                    <div key={i} className="horario-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i < horarios.length - 1 ? `1px dashed ${C.border}` : 'none' }}>
                       <span style={{ fontSize: 15, color: C.ink, fontWeight: 500 }}>{dia}</span>
                       <span style={{ fontSize: 14, color: C.inkMuted }}>{hora}</span>
                     </div>
