@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="bgGrad" cx="80%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#F9E0E5" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FDF5F6" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9E0E5"/>
+      <stop offset="100%" stop-color="#F2C4CE"/>
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F2C4CE" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#F2C4CE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Decoración círculo difuminado -->
+  <circle cx="950" cy="120" r="280" fill="url(#glowGrad)"/>
+  <circle cx="200" cy="530" r="200" fill="url(#glowGrad)"/>
+
+  <!-- Grupo centrado -->
+  <g transform="translate(600, 315)">
+
+    <!-- Círculo LN -->
+    <circle cx="-220" cy="0" r="72" fill="url(#circleGrad)"/>
+    <text x="-220" y="8" font-family="ui-monospace, monospace" font-size="26" fill="rgba(44,31,34,0.7)" text-anchor="middle" letter-spacing="3">LN</text>
+
+    <!-- Línea separadora vertical -->
+    <line x1="-120" y1="-60" x2="-120" y2="60" stroke="#F2C4CE" stroke-width="1" opacity="0.6"/>
+
+    <!-- Textos -->
+    <text x="-90" y="-18" font-family="Georgia, serif" font-size="52" font-weight="400" fill="#2C1F22" text-anchor="start">Dra. Lucia Nosetti</text>
+    <text x="-90" y="28" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#E8A0A8" text-anchor="start" letter-spacing="4">DERMATOLOGÍA · ESTÉTICA</text>
+
+  </g>
+
+  <!-- Línea inferior decorativa -->
+  <rect x="480" y="580" width="240" height="1" fill="#F2C4CE" opacity="0.5"/>
+</svg>
