@@ -127,7 +127,7 @@ function Nav() {
   const links = [
     ['Inicio', '#inicio'],
     ['Sobre mí', '#sobre-mi'],
-    ['Procedimientos', '#procedimientos'],
+    ['Servicios', '#procedimientos'],
     ['Trayectoria', '#trayectoria'],
     ['Redes', '#instagram'],
     ['Contacto', '#turnos'],
