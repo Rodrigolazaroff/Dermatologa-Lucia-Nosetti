@@ -129,9 +129,9 @@ function Nav() {
     ['Sobre mí', '#sobre-mi'],
     ['Procedimientos', '#procedimientos'],
     ['Formación', '#formacion'],
+    ['Experiencia', '#experiencia'],
     ['Instagram', '#instagram'],
     ['Turnos', '#turnos'],
-    ['Contacto', '#contacto'],
   ];
 
   const handleClick = (e, href) => {
@@ -214,6 +214,7 @@ function Nav() {
 function Hero() {
   return (
     <section id="inicio" style={{
+      scrollMarginTop: 70,
       position: 'relative', height: '100vh', boxSizing: 'border-box', display: 'flex', alignItems: 'flex-start',
       background: `radial-gradient(ellipse at 30% 30%, ${C.pinkSoft} 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, ${C.pink}55 0%, transparent 60%), ${C.warmWhite}`,
       overflow: 'hidden',
@@ -402,58 +403,93 @@ function Formacion() {
   const timeline = [
     ['2017',      'Médica (MN 166.497)',                    'Universidad del Salvador',       'USAL', 'https://www.usal.edu.ar/ingreso/'],
     ['2018–2021', 'Residencia de Pediatría',                'Hospital Alemán',                'ALEM', 'https://www.hospitalaleman.org.ar/'],
-    ['2022',      'Posgrado en Medicina Estética',           'SAEME · UBA (Sociedad Argentina de Especialistas en Medicina Estética)', 'SAEM', 'https://saeme.com.ar/'],
-    ['2022–2025', 'Residencia de Dermatología Pediátrica',  'Hospital Ramos Mejía',           'RAMO', 'https://buenosaires.gob.ar/gcaba_historico/salud/hospitales-y-establecimientos-de-salud/hospital-ramos-mejia'],
+    ['2022',      'Posgrado en Medicina Estética',           'SAEME · UBA', 'SAEM', 'https://saeme.com.ar/'],
+    ['2022–2025', 'Residencia de Dermatología Pediátrica',  'Hospital Ramos Mejía', 'RAMO', 'https://buenosaires.gob.ar/gcaba_historico/salud/hospitales-y-establecimientos-de-salud/hospital-ramos-mejia'],
   ];
+
+  // altura del bloque de contenido arriba/abajo de la línea
+  const BLOCK = 140;
+  const DOT = 16;
+
+  return (
+    <section id="formacion" style={{ background: '#fff', padding: '120px 0' }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px' }}>
+        <Reveal>
+          <SectionTag>Formación</SectionTag>
+          <h2 style={titleStyle}>Trayectoria <em style={{ color: C.pinkNude, fontWeight: 400 }}>académica</em></h2>
+        </Reveal>
+
+        {/* Timeline zigzag horizontal */}
+        <div className="timeline-h" style={{ position: 'relative', marginTop: 48, height: BLOCK * 2 + DOT + 40 }}>
+          {/* línea central */}
+          <div className="timeline-h-line" style={{
+            position: 'absolute', top: BLOCK + DOT / 2, left: 0, right: 0,
+            height: 2, background: `linear-gradient(to right, ${C.pink}, ${C.pinkSoft})`,
+          }} />
+
+          <div className="timeline-h-items" style={{ display: 'flex', height: '100%', position: 'relative' }}>
+            {timeline.map(([year, title, place, logo, url], i) => {
+              const above = i % 2 === 0;
+              return (
+                <Reveal key={i} delay={i * 100} style={{ flex: 1, position: 'relative' }}>
+                  {/* punto conector en la línea central */}
+                  <div style={{
+                    position: 'absolute', top: BLOCK, left: 0,
+                    width: DOT, height: DOT, borderRadius: '50%',
+                    background: C.pinkNude, border: '3px solid #fff', boxShadow: `0 0 0 2px ${C.pink}`,
+                  }} />
+
+                  {/* contenido arriba o abajo */}
+                  <div style={{
+                    position: 'absolute', left: 0, paddingRight: 20,
+                    ...(above
+                      ? { top: 0, height: BLOCK - 12, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }
+                      : { top: BLOCK + DOT + 12 }),
+                  }}>
+                    <div style={{ fontSize: 12, color: C.pinkNude, fontWeight: 500, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>{year}</div>
+                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 400, color: C.ink, margin: '0 0 6px', lineHeight: 1.25 }}>{title}</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                      <LogoChip label={logo} />
+                      <a href={url} target="_blank" rel="noreferrer" style={{ fontSize: 13, color: C.inkMuted, textDecoration: 'none', transition: 'transform .2s ease', display: 'inline-block' }}
+                        onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+                        onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+                      >{place}</a>
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Experiencia ───────────────────────────────────────────────────────────────
+function Experiencia() {
   const exp = [
-    ['Hospital Alemán',        'https://www.hospitalaleman.org.ar/'],
-    ['Sanatorio San José',     'https://www.sanatoriosanjose.org.ar/'],
-    ['Clínica Zabala',         'https://www.swissmedical.com.ar/clinewsite/zabala/'],
+    ['Hospital Alemán',     'https://www.hospitalaleman.org.ar/'],
+    ['Sanatorio San José',  'https://www.sanatoriosanjose.org.ar/'],
+    ['Clínica Zabala',      'https://www.swissmedical.com.ar/clinewsite/zabala/'],
     ['Ministerio de Salud', 'https://buenosaires.gob.ar/gcaba_historico/salud'],
   ];
 
   return (
-    <section id="formacion" style={{ background: '#fff', padding: '120px 0' }}>
-      <div className="form-grid" style={{
-        maxWidth: 1240, margin: '0 auto', padding: '0 28px',
-        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80,
-      }}>
+    <section id="experiencia" style={{ background: C.altSection, padding: '120px 0' }}>
+      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px' }}>
         <Reveal>
-          <SectionTag>Formación</SectionTag>
-          <h2 style={titleStyle}>Trayectoria <em style={{ color: C.pinkNude, fontWeight: 400 }}>académica</em></h2>
-          <div style={{ position: 'relative', paddingLeft: 36, marginTop: 36 }}>
-            <div style={{ position: 'absolute', left: 11, top: 8, bottom: 8, width: 2, background: `linear-gradient(${C.pink}, ${C.pinkSoft})` }} />
-            {timeline.map(([year, title, place, logo, url], i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div style={{ position: 'relative', marginBottom: 36 }}>
-                  <div style={{ position: 'absolute', left: -32, top: 4, width: 16, height: 16, borderRadius: '50%', background: C.pinkNude, border: '3px solid #fff', boxShadow: `0 0 0 2px ${C.pink}` }} />
-                  <div style={{ fontSize: 12, color: C.pinkNude, fontWeight: 500, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>{year}</div>
-                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, fontWeight: 400, color: C.ink, margin: '0 0 6px', lineHeight: 1.25 }}>{title}</h3>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <LogoChip label={logo} />
-                    <a href={url} target="_blank" rel="noreferrer" style={{ fontSize: 14, color: C.inkMuted, textDecoration: 'none', transition: 'transform .2s ease', display: 'inline-block' }}
-                      onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-                      onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-                    >{place}</a>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal delay={150}>
           <SectionTag>Experiencia</SectionTag>
           <h2 style={titleStyle}>Recorrido <em style={{ color: C.pinkNude, fontWeight: 400 }}>profesional</em></h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 36 }}>
-            {exp.map(([place, url], i) => (
-              <Reveal key={place} delay={i * 70}>
-                <a href={url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+        </Reveal>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 36 }}>
+          {exp.map(([place, url], i) => (
+            <Reveal key={place} delay={i * 70}>
+              <a href={url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
                 <div className="exp-card" style={{
-                  background: C.altSection, border: `1px solid ${C.border}`, borderRadius: 12,
+                  background: '#fff', border: `1px solid ${C.border}`, borderRadius: 12,
                   padding: '18px 22px', display: 'flex', alignItems: 'center', gap: 16,
                   transition: 'transform .25s ease, box-shadow .25s ease', cursor: 'pointer',
-                  maxWidth: '87%',
                 }}
                   onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-3px)'}
                   onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
@@ -461,11 +497,10 @@ function Formacion() {
                   <div style={{ width: 10, height: 10, borderRadius: '50%', background: C.pinkNude, flexShrink: 0, boxShadow: `0 0 0 4px ${C.pinkSoft}` }} />
                   <div style={{ fontSize: 15, fontWeight: 500, color: C.ink }}>{place}</div>
                 </div>
-                </a>
-              </Reveal>
-            ))}
-          </div>
-        </Reveal>
+              </a>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -484,33 +519,38 @@ function Instagram() {
   }, []);
 
   return (
-    <section id="instagram" style={{ background: C.altSection, padding: '120px 0' }}>
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px', textAlign: 'center' }}>
-        <Reveal>
-          <SectionTag>Instagram</SectionTag>
-          <h2 style={{ ...titleStyle, textAlign: 'center' }}>
-            Seguime en <em style={{ color: C.pinkNude, fontWeight: 400 }}>Instagram</em>
-          </h2>
-          <p style={{ color: C.pinkNude, fontSize: 16, fontWeight: 500, margin: '0 0 50px' }}>@dralucianosetti</p>
-        </Reveal>
-        <Reveal delay={120}>
+    <section id="instagram" style={{ background: '#fff', padding: '120px 0' }}>
+      <div className="ig-grid" style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px', display: 'flex', gap: 80, alignItems: 'center' }}>
+
+        {/* Video izquierda */}
+        <Reveal delay={120} style={{ flexShrink: 0, width: 480 }}>
           <div style={{
-            maxWidth: 400, margin: '0 auto 32px', background: '#fff', borderRadius: 18, padding: 12,
+            width: 480, background: '#fff', borderRadius: 18, padding: 12,
             boxShadow: '0 30px 60px -30px rgba(232,160,168,0.6)', border: `1px solid ${C.border}`,
           }}>
             <blockquote
               className="instagram-media"
               data-instgrm-permalink="https://www.instagram.com/reel/DP3zU3jADq6/?igsh=cGIydjE2dTdmamN3"
               data-instgrm-version="14"
-              style={{ background: '#FFF', border: 0, margin: '0 auto', maxWidth: 400, minWidth: 0, padding: 0, width: '100%' }}
+              style={{ background: '#FFF', border: 0, margin: '0 auto', maxWidth: 480, minWidth: 0, padding: 0, width: '100%' }}
             >
               <div style={{ padding: 16, textAlign: 'center', color: C.inkMuted, fontSize: 14 }}>
                 Cargando contenido de Instagram…
               </div>
             </blockquote>
           </div>
+        </Reveal>
+
+        {/* Texto derecha */}
+        <Reveal style={{ flex: 1 }}>
+          <SectionTag>Instagram</SectionTag>
+          <h2 style={{ ...titleStyle, textAlign: 'left' }}>
+            Seguime en <em style={{ color: C.pinkNude, fontWeight: 400 }}>Instagram</em>
+          </h2>
+          <p style={{ color: C.pinkNude, fontSize: 16, fontWeight: 500, margin: '0 0 36px' }}>@dralucianosetti</p>
           <a href={IG_LINK} target="_blank" rel="noreferrer" className="btn-outline">Ver más en Instagram</a>
         </Reveal>
+
       </div>
     </section>
   );
@@ -565,13 +605,11 @@ function Turnos() {
               <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 30, fontWeight: 400, color: C.ink, margin: '0 0 10px' }}>Solicitá tu turno</h3>
               <p style={{ color: C.inkMuted, fontSize: 15, margin: '0 0 26px', maxWidth: 320, lineHeight: 1.55 }}>Escribinos por WhatsApp y coordinamos.</p>
               <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn-whatsapp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" style={{ marginRight: 10, verticalAlign: 'middle' }}>
-                  <path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.2s-.8.9-1 1.1c-.2.2-.4.2-.7.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.4z"/>
-                  <path d="M20.5 3.5A10 10 0 0 0 4.1 16.6L3 21l4.5-1.2a10 10 0 0 0 13-15.3zM12 19.6a7.6 7.6 0 0 1-3.9-1.1l-.3-.2-2.8.7.7-2.7-.2-.3a7.6 7.6 0 1 1 6.5 3.6z"/>
+                <svg width="20" height="20" viewBox="0 0 32 32" fill="#fff" style={{ marginRight: 10, verticalAlign: 'middle', flexShrink: 0 }}>
+                  <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.653 4.827 1.797 6.854L2 30l7.356-1.768A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.56 11.56 0 0 1-5.89-1.607l-.422-.252-4.366 1.05 1.083-4.253-.276-.437A11.543 11.543 0 0 1 4.4 16C4.4 9.593 9.593 4.4 16 4.4S27.6 9.593 27.6 16 22.407 27.6 16 27.6zm6.33-8.63c-.347-.174-2.054-1.013-2.374-1.129-.32-.116-.553-.174-.786.174-.232.347-.9 1.129-1.104 1.362-.203.232-.406.26-.753.087-.347-.174-1.465-.54-2.79-1.722-1.031-.92-1.727-2.055-1.93-2.402-.203-.347-.022-.535.153-.708.157-.155.347-.406.52-.609.174-.203.232-.347.347-.58.116-.232.058-.435-.029-.609-.087-.174-.786-1.893-1.076-2.592-.283-.68-.57-.588-.786-.598l-.668-.011c-.232 0-.609.087-.927.435-.319.347-1.218 1.19-1.218 2.902s1.247 3.366 1.42 3.598c.174.232 2.452 3.744 5.942 5.25.83.358 1.478.572 1.983.732.833.265 1.591.228 2.19.138.668-.1 2.054-.84 2.345-1.651.29-.812.29-1.507.203-1.652-.087-.145-.319-.232-.667-.406z"/>
                 </svg>
                 Solicitar turno por WhatsApp
               </a>
-              <p style={{ color: C.inkMuted, fontSize: 12.5, margin: '20px 0 0', fontStyle: 'italic' }}>Respondemos a la brevedad en horario de atención.</p>
             </div>
           </Reveal>
         </div>
@@ -580,112 +618,48 @@ function Turnos() {
   );
 }
 
-// ── Consultas ─────────────────────────────────────────────────────────────────
-function Consultas() {
-  const [form, setForm] = useState({ nombre: '', apellido: '', email: '', edad: '', consulta: '' });
-  const [status, setStatus] = useState('idle');
-
-  const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-
-  const submit = async (e) => {
-    e.preventDefault();
-    setStatus('sending');
-    // TODO: reemplazar con tu URL de Google Apps Script
-    const GOOGLE_SCRIPT_URL = '';
-    try {
-      if (GOOGLE_SCRIPT_URL) {
-        await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
-      } else {
-        await new Promise((r) => setTimeout(r, 900));
-      }
-      setStatus('success');
-      setForm({ nombre: '', apellido: '', email: '', edad: '', consulta: '' });
-    } catch {
-      setStatus('error');
-    }
-  };
-
-  const inputStyle = {
-    width: '100%', background: '#fff', border: `1px solid ${C.border}`, borderRadius: 10,
-    padding: '14px 16px', fontSize: 15, fontFamily: 'inherit', color: C.ink,
-    outline: 'none', transition: 'border-color .2s, box-shadow .2s',
-  };
-  const labelStyle = {
-    display: 'block', fontSize: 12, color: C.inkMuted,
-    letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 8, fontWeight: 500,
-  };
+// ── Galería Consultorio ───────────────────────────────────────────────────────
+function GaleriaConsultorio() {
+  // Reemplazá estas rutas con las fotos reales del consultorio
+  const fotos = [
+    'images/Consultorio1.webp',
+    'images/Consultorio2.webp',
+    'images/Consultorio3.webp',
+  ];
+  // Triplicamos para que el loop sea continuo y nunca se vea el salto
+  const todas = [...fotos, ...fotos, ...fotos];
 
   return (
-    <section id="contacto" style={{ background: C.altSection, padding: '120px 0' }}>
-      <div style={{ maxWidth: 880, margin: '0 auto', padding: '0 28px' }}>
-        <Reveal>
-          <div style={{ textAlign: 'center', marginBottom: 50 }}>
-            <SectionTag>Contacto</SectionTag>
-            <h2 style={{ ...titleStyle, textAlign: 'center' }}>
-              ¿Tenés alguna <em style={{ color: C.pinkNude, fontWeight: 400 }}>duda?</em>
-            </h2>
-            <p style={{ color: C.inkMuted, fontSize: 16, maxWidth: 560, margin: '0 auto', lineHeight: 1.6, fontWeight: 300 }}>
-              Escribinos tu pregunta general y te respondemos a la brevedad. Para consultas médicas específicas, coordiná un turno por WhatsApp.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={100}>
-          <form onSubmit={submit} style={{ background: '#fff', borderRadius: 20, padding: '40px', border: `1px solid ${C.border}`, boxShadow: '0 30px 60px -30px rgba(232,160,168,0.45)' }}>
-            <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18, marginBottom: 18 }}>
-              <div>
-                <label style={labelStyle}>Nombre</label>
-                <input className="ff" type="text" required value={form.nombre} onChange={update('nombre')} style={inputStyle} />
-              </div>
-              <div>
-                <label style={labelStyle}>Apellido</label>
-                <input className="ff" type="text" required value={form.apellido} onChange={update('apellido')} style={inputStyle} />
-              </div>
+    <section style={{ background: C.altSection, padding: '80px 0', overflow: 'hidden' }}>
+      <Reveal style={{ textAlign: 'center', marginBottom: 48 }}>
+        <SectionTag>Consultorio</SectionTag>
+        <h2 style={{ ...titleStyle, textAlign: 'center' }}>
+          Nuestro <em style={{ color: C.pinkNude, fontWeight: 400 }}>espacio</em>
+        </h2>
+      </Reveal>
+      <div style={{ overflow: 'hidden', width: '100%' }}>
+        <div className="carousel-track">
+          {todas.map((src, i) => (
+            <div key={i} className="carousel-item" style={{
+              flexShrink: 0, width: 420, height: 300, borderRadius: 20, overflow: 'hidden',
+              border: `1px solid ${C.border}`, boxShadow: C.shadowPink,
+            }}>
+              <img
+                src={src}
+                alt={`Consultorio ${(i % 3) + 1}`}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.parentElement.style.background = C.pinkSoft;
+                  e.currentTarget.parentElement.style.display = 'flex';
+                  e.currentTarget.parentElement.style.alignItems = 'center';
+                  e.currentTarget.parentElement.style.justifyContent = 'center';
+                  e.currentTarget.parentElement.innerHTML = `<span style="color:${C.pinkNude};font-size:13px;font-family:ui-monospace,monospace;letter-spacing:1.5px">[ FOTO ${(i % 3) + 1} ]</span>`;
+                }}
+              />
             </div>
-            <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 18, marginBottom: 18 }}>
-              <div>
-                <label style={labelStyle}>Correo electrónico</label>
-                <input className="ff" type="email" required value={form.email} onChange={update('email')} style={inputStyle} />
-              </div>
-              <div>
-                <label style={labelStyle}>Edad</label>
-                <input className="ff" type="number" required value={form.edad} onChange={update('edad')} style={inputStyle} min="0" max="120" />
-              </div>
-            </div>
-            <div style={{ marginBottom: 24 }}>
-              <label style={labelStyle}>Consulta o pregunta</label>
-              <textarea className="ff" required rows={4} value={form.consulta} onChange={update('consulta')} style={{ ...inputStyle, resize: 'vertical', minHeight: 120, fontFamily: 'inherit' }} />
-            </div>
-            <button type="submit" disabled={status === 'sending'} className="btn-primary" style={{ width: '100%', border: 0, cursor: 'pointer', fontSize: 15 }}>
-              {status === 'sending' ? 'Enviando…' : 'Enviar consulta'}
-            </button>
-            {status === 'success' && (
-              <div style={{ marginTop: 18, padding: '14px 18px', borderRadius: 10, background: C.pinkSoft, color: C.ink, fontSize: 14, textAlign: 'center', border: `1px solid ${C.pink}` }}>
-                ¡Gracias! Tu consulta fue enviada.
-              </div>
-            )}
-            {status === 'error' && (
-              <div style={{ marginTop: 18, padding: '14px 18px', borderRadius: 10, background: '#FEE', color: '#A33', fontSize: 14, textAlign: 'center' }}>
-                Ocurrió un error. Probá de nuevo o escribinos por WhatsApp.
-              </div>
-            )}
-          </form>
-        </Reveal>
-
-        <Reveal delay={200}>
-          <div className="gallery-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginTop: 36 }}>
-            {['FOTO_1', 'FOTO_2', 'FOTO_3'].map((l) => (
-              <div key={l} style={{ aspectRatio: '1/1', border: `2px dashed ${C.pink}`, borderRadius: 14, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 8, color: C.pinkNude }}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <circle cx="9" cy="9" r="2"/>
-                  <path d="M21 15l-5-5L5 21"/>
-                </svg>
-                <span style={{ fontFamily: 'ui-monospace, Menlo, monospace', fontSize: 11, letterSpacing: 1.5 }}>[ {l} ]</span>
-              </div>
-            ))}
-          </div>
-        </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -703,8 +677,8 @@ function FinalCTA() {
         </h2>
         <p style={{ color: C.inkMuted, fontSize: 18, margin: '0 0 36px', fontWeight: 300 }}>Escribinos por WhatsApp y coordinamos.</p>
         <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn-whatsapp" style={{ fontSize: 16 }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" style={{ marginRight: 10, verticalAlign: 'middle' }}>
-            <path d="M20.5 3.5A10 10 0 0 0 4.1 16.6L3 21l4.5-1.2a10 10 0 0 0 13-15.3zM12 19.6a7.6 7.6 0 0 1-3.9-1.1l-.3-.2-2.8.7.7-2.7-.2-.3a7.6 7.6 0 1 1 6.5 3.6z"/>
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="#fff" style={{ marginRight: 10, verticalAlign: 'middle', flexShrink: 0 }}>
+            <path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.653 4.827 1.797 6.854L2 30l7.356-1.768A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.56 11.56 0 0 1-5.89-1.607l-.422-.252-4.366 1.05 1.083-4.253-.276-.437A11.543 11.543 0 0 1 4.4 16C4.4 9.593 9.593 4.4 16 4.4S27.6 9.593 27.6 16 22.407 27.6 16 27.6zm6.33-8.63c-.347-.174-2.054-1.013-2.374-1.129-.32-.116-.553-.174-.786.174-.232.347-.9 1.129-1.104 1.362-.203.232-.406.26-.753.087-.347-.174-1.465-.54-2.79-1.722-1.031-.92-1.727-2.055-1.93-2.402-.203-.347-.022-.535.153-.708.157-.155.347-.406.52-.609.174-.203.232-.347.347-.58.116-.232.058-.435-.029-.609-.087-.174-.786-1.893-1.076-2.592-.283-.68-.57-.588-.786-.598l-.668-.011c-.232 0-.609.087-.927.435-.319.347-1.218 1.19-1.218 2.902s1.247 3.366 1.42 3.598c.174.232 2.452 3.744 5.942 5.25.83.358 1.478.572 1.983.732.833.265 1.591.228 2.19.138.668-.1 2.054-.84 2.345-1.651.29-.812.29-1.507.203-1.652-.087-.145-.319-.232-.667-.406z"/>
           </svg>
           Solicitar turno por WhatsApp
         </a>
@@ -718,7 +692,7 @@ function Footer() {
   const links = [
     ['Instagram', IG_LINK,   <svg key="i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>],
     ['LinkedIn',  LI_LINK,   <svg key="l" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 17v-7"/></svg>],
-    ['WhatsApp',  'https://wa.me/541169323425', <svg key="w" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.5 3.5A10 10 0 0 0 4.1 16.6L3 21l4.5-1.2a10 10 0 0 0 13-15.3z" strokeLinejoin="round"/></svg>],
+    ['WhatsApp',  'https://wa.me/541169323425', <svg key="w" width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.49.653 4.827 1.797 6.854L2 30l7.356-1.768A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.56 11.56 0 0 1-5.89-1.607l-.422-.252-4.366 1.05 1.083-4.253-.276-.437A11.543 11.543 0 0 1 4.4 16C4.4 9.593 9.593 4.4 16 4.4S27.6 9.593 27.6 16 22.407 27.6 16 27.6zm6.33-8.63c-.347-.174-2.054-1.013-2.374-1.129-.32-.116-.553-.174-.786.174-.232.347-.9 1.129-1.104 1.362-.203.232-.406.26-.753.087-.347-.174-1.465-.54-2.79-1.722-1.031-.92-1.727-2.055-1.93-2.402-.203-.347-.022-.535.153-.708.157-.155.347-.406.52-.609.174-.203.232-.347.347-.58.116-.232.058-.435-.029-.609-.087-.174-.786-1.893-1.076-2.592-.283-.68-.57-.588-.786-.598l-.668-.011c-.232 0-.609.087-.927.435-.319.347-1.218 1.19-1.218 2.902s1.247 3.366 1.42 3.598c.174.232 2.452 3.744 5.942 5.25.83.358 1.478.572 1.983.732.833.265 1.591.228 2.19.138.668-.1 2.054-.84 2.345-1.651.29-.812.29-1.507.203-1.652-.087-.145-.319-.232-.667-.406z"/></svg>],
     ['Email',     `mailto:${MAIL}`, <svg key="m" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>],
   ];
 
@@ -752,9 +726,10 @@ function LandingPage() {
         <Sobre />
         <Procedimientos />
         <Formacion />
+        <Experiencia />
         <Instagram />
         <Turnos />
-        <Consultas />
+        <GaleriaConsultorio />
         <FinalCTA />
       </main>
       <Footer />

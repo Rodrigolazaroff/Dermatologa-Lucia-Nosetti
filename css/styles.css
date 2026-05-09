@@ -200,6 +200,30 @@ button {
 }
 
 /* ─────────────────────────────────────────
+   Carrusel Consultorio
+───────────────────────────────────────── */
+@keyframes carousel-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: carousel-scroll 18s linear infinite;
+  padding: 12px 0;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.carousel-item {
+  cursor: default;
+}
+
+/* ─────────────────────────────────────────
    Responsive — Tablet (≤ 960px)
 ───────────────────────────────────────── */
 @media (max-width: 960px) {
@@ -215,6 +239,12 @@ button {
     gap: 50px !important;
   }
 
+  .ig-grid {
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
+  .ig-grid > * { width: 100% !important; flex-shrink: 1 !important; }
+
   .proc-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -228,6 +258,22 @@ button {
   .stat-grid    { grid-template-columns: 1fr !important; }
   .form-row     { grid-template-columns: 1fr !important; }
   .gallery-grid { grid-template-columns: 1fr !important; }
+
+  /* timeline horizontal → vertical en mobile */
+  .timeline-h { height: auto !important; }
+  .timeline-h-line { display: none !important; }
+  .timeline-h-items {
+    flex-direction: column !important;
+    height: auto !important;
+    padding-left: 28px !important;
+    border-left: 2px solid #e8a0a8;
+    gap: 0 !important;
+  }
+  .timeline-h-items > * {
+    position: relative !important;
+    flex: none !important;
+    margin-bottom: 32px !important;
+  }
 
   h1      { font-size: 44px !important; }
   section { padding: 80px 0 !important; }
