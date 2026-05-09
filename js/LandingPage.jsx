@@ -90,7 +90,7 @@ function LogoChip({ label = 'LOGO' }) {
       background: `linear-gradient(135deg, ${C.pinkSoft}, ${C.pink})`,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       fontFamily: 'ui-monospace, "SF Mono", Menlo, monospace',
-      fontSize: 9, color: 'rgba(44,31,34,0.7)', letterSpacing: 1, flexShrink: 0,
+      fontSize: 16, color: 'rgba(44,31,34,0.7)', letterSpacing: 1, flexShrink: 0,
     }}>{label}</div>
   );
 }
@@ -128,10 +128,9 @@ function Nav() {
     ['Inicio', '#inicio'],
     ['Sobre mí', '#sobre-mi'],
     ['Procedimientos', '#procedimientos'],
-    ['Formación', '#formacion'],
-    ['Experiencia', '#experiencia'],
+    ['Trayectoria', '#trayectoria'],
     ['Redes', '#instagram'],
-    ['Turnos', '#turnos'],
+    ['Contacto', '#turnos'],
   ];
 
   const handleClick = (e, href) => {
@@ -423,8 +422,8 @@ function Procedimientos() {
   );
 }
 
-// ── Formación ─────────────────────────────────────────────────────────────────
-function Formacion() {
+// ── Trayectoria (Formación + Experiencia) ────────────────────────────────────
+function Trayectoria() {
   const timeline = [
     ['2017',      'Médica (MN 166.497)',                    'Universidad del Salvador',       'USAL', 'https://www.usal.edu.ar/ingreso/'],
     ['2018–2021', 'Residencia de Pediatría',                'Hospital Alemán',                'ALEM', 'https://www.hospitalaleman.org.ar/'],
@@ -432,16 +431,23 @@ function Formacion() {
     ['2022–2025', 'Residencia de Dermatología Pediátrica',  'Hospital Ramos Mejía', 'RAMO', 'https://buenosaires.gob.ar/gcaba_historico/salud/hospitales-y-establecimientos-de-salud/hospital-ramos-mejia'],
   ];
 
+  const exp = [
+    ['Hospital Alemán',     'https://www.hospitalaleman.org.ar/'],
+    ['Sanatorio San José',  'https://www.sanatoriosanjose.org.ar/'],
+    ['Clínica Zabala',      'https://www.swissmedical.com.ar/clinewsite/zabala/'],
+    ['Ministerio de Salud', 'https://buenosaires.gob.ar/gcaba_historico/salud'],
+  ];
+
   // altura del bloque de contenido arriba/abajo de la línea
   const BLOCK = 140;
   const DOT = 16;
 
   return (
-    <section id="formacion" style={{ background: '#fff', padding: '120px 0' }}>
+    <section id="trayectoria" style={{ background: '#fff', padding: '120px 0' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px' }}>
         <Reveal>
           <SectionTag>Formación</SectionTag>
-          <h2 style={titleStyle}>Trayectoria <em style={{ color: C.pinkNude, fontWeight: 400 }}>académica</em></h2>
+          <h2 style={titleStyle}>Trayectoria <em style={{ color: C.pinkNude, fontWeight: 400 }}>académica y profesional</em></h2>
         </Reveal>
 
         {/* Timeline zigzag horizontal */}
@@ -486,33 +492,25 @@ function Formacion() {
             })}
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-// ── Experiencia ───────────────────────────────────────────────────────────────
-function Experiencia() {
-  const exp = [
-    ['Hospital Alemán',     'https://www.hospitalaleman.org.ar/'],
-    ['Sanatorio San José',  'https://www.sanatoriosanjose.org.ar/'],
-    ['Clínica Zabala',      'https://www.swissmedical.com.ar/clinewsite/zabala/'],
-    ['Ministerio de Salud', 'https://buenosaires.gob.ar/gcaba_historico/salud'],
-  ];
-
-  return (
-    <section id="experiencia" style={{ background: C.altSection, padding: '120px 0' }}>
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 28px' }}>
+        {/* Recorrido profesional */}
         <Reveal>
-          <SectionTag>Experiencia</SectionTag>
-          <h2 style={titleStyle}>Recorrido <em style={{ color: C.pinkNude, fontWeight: 400 }}>profesional</em></h2>
+          <div style={{ marginTop: 80 }}>
+            <SectionTag>Experiencia</SectionTag>
+            <h3 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontSize: 26, fontWeight: 400,
+              color: C.ink, margin: '0 0 24px', textAlign: 'left',
+            }}>
+              Recorrido <em style={{ color: C.pinkNude, fontWeight: 400 }}>profesional</em>
+            </h3>
+          </div>
         </Reveal>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, marginTop: 36 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
           {exp.map(([place, url], i) => (
             <Reveal key={place} delay={i * 70}>
               <a href={url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
                 <div className="exp-card" style={{
-                  background: '#fff', border: `1px solid ${C.border}`, borderRadius: 12,
+                  background: C.altSection, border: `1px solid ${C.border}`, borderRadius: 12,
                   padding: '18px 22px', display: 'flex', alignItems: 'center', gap: 16,
                   transition: 'transform .25s ease, box-shadow .25s ease', cursor: 'pointer',
                 }}
@@ -752,8 +750,7 @@ function LandingPage() {
         <Hero />
         <Sobre />
         <Procedimientos />
-        <Formacion />
-        <Experiencia />
+        <Trayectoria />
         <Instagram />
         <Turnos />
         <GaleriaConsultorio />
