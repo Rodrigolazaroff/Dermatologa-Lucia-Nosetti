@@ -262,8 +262,8 @@ button {
   /* ── Hero mobile ── */
   /* Menos espacio entre nav y badge */
   #inicio { padding-top: 20px !important; align-items: flex-start !important; height: auto !important; min-height: 100vh !important; }
-  /* Foto principal completa en mobile */
-  #inicio img { object-fit: contain !important; max-height: 55vw !important; width: 100% !important; border-radius: 14px !important; }
+  /* Foto principal en mobile igual que foto de perfil */
+  #inicio img { object-fit: cover !important; width: 100% !important; aspect-ratio: 4/5 !important; max-height: none !important; border-radius: 14px !important; }
 
   /* ── Timeline horizontal → vertical en mobile ── */
   .timeline-h { height: auto !important; }
