@@ -433,9 +433,7 @@ function Trayectoria() {
 
   const exp = [
     ['Hospital Alemán',     'https://www.hospitalaleman.org.ar/'],
-    ['Sanatorio San José',  'https://www.sanatoriosanjose.org.ar/'],
-    ['Clínica Zabala',      'https://www.swissmedical.com.ar/clinewsite/zabala/'],
-    ['Ministerio de Salud', 'https://buenosaires.gob.ar/gcaba_historico/salud'],
+    ['Hospital Ramos Mejía', 'https://buenosaires.gob.ar/gcaba_historico/salud/hospitales-y-establecimientos-de-salud/hospital-ramos-mejia'],
   ];
 
   // altura del bloque de contenido arriba/abajo de la línea
